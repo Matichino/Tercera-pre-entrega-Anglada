@@ -10,3 +10,9 @@ urlpatterns = [
     
 ]
 
+Formularios = [
+    path('form-con-api/', views.form_con_api, name="Form-Con-Api"),
+
+]
+
+urlpatterns += Formularios

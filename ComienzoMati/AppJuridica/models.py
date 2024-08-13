@@ -2,9 +2,9 @@ from django.db import models
 
 # Create your models here.
 class Cliente(models.Model):
-    usuario = models.IntegerField()
+    usuario = models.CharField(max_length=8)
     contraseña= models.CharField(max_length=8)
-    numero_de_caso= models.CharField(max_length=10)
+    numero_de_caso= models.IntegerField()
 
 class Yasoycliente(models.Model):
     nombre = models.CharField(max_length=40)
