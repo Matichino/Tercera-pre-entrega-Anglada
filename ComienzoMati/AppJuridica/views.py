@@ -4,6 +4,7 @@ from AppJuridica.forms import ClienteFormulario
 from .models import Yasoycliente
 from .forms import YasoyclienteForm
 from .forms import DatosdecontactoForm
+from .forms import BuscarNumeroCasoForm
 
 def inicio(request):
     return render (request, "AppJuridica/index.html")
@@ -69,3 +70,22 @@ def crear_datos_contacto(request):
 
 def pagina_exito(request):
     return render(request, 'AppJuridica/pagina_exito.html')
+
+
+
+# Vista para buscar
+
+def buscar_numero_caso(request):
+    resultado = None
+    form = BuscarNumeroCasoForm()
+
+    if request.method == 'POST':
+        form = BuscarNumeroCasoForm(request.POST)
+        if form.is_valid():
+            numero_de_caso = form.cleaned_data['numero_de_caso']
+            try:
+                resultado = Cliente.objects.get(numero_de_caso=numero_de_caso)
+            except Cliente.DoesNotExist:
+                resultado = None
+
+    return render(request, 'AppJuridica/buscar_numero_caso.html', {'form': form, 'resultado': resultado})

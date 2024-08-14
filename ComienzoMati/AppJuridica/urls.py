@@ -15,8 +15,9 @@ Formularios = [
     path('editar-cliente/<int:pk>/', views.editar_cliente, name='editar_cliente'),
     path('clientes/', views.cliente_listar, name='cliente_listar'),
     path('crear-datos-contacto/', views.crear_datos_contacto, name='crear_datos_contacto'),
-    path('pagina_exito/', views.pagina_exito, name='pagina_exito'),  # Página de éxito o confirmación
-    
+    path('pagina_exito/', views.pagina_exito, name='pagina_exito'), 
+    path('buscar-numero-caso/', views.buscar_numero_caso, name='buscar_numero_caso'),
+        
 
 ]
 

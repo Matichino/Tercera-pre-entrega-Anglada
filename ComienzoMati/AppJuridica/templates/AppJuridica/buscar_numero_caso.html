@@ -1,0 +1,22 @@
+{% extends "AppJuridica/base.html" %}
+
+{% load static %}
+
+
+{% block main  %}
+    <h1>Buscar Número de Caso</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Buscar</button>
+    </form>
+
+    {% if resultado %}
+        <h2>Resultado:</h2>
+        <p><strong>Usuario:</strong> {{ resultado.usuario }}</p>
+        <p><strong>Contraseña:</strong> {{ resultado.contraseña }}</p>
+        <p><strong>Número de Caso:</strong> {{ resultado.numero_de_caso }}</p>
+    {% elif resultado is None and request.method == 'POST' %}
+        <p>No se encontró ningún cliente con el número de caso proporcionado.</p>
+    {% endif %}
+{% endblock %}
