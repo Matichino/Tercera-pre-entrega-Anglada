@@ -2,18 +2,16 @@
 
 {% load static %}
 
+{% block title %}Formulario de Cliente{% endblock title %}
 
-{% block main  %}
+{% block main %}
+    <h1 style="margin-bottom: 60px;">Formulario de Cliente</h1> <!-- Ajusta el margen según sea necesario -->
 
-{% block title %} Formulario{% endblock title %}
-        <!-- action: representa la url a la que nos va a re-dirigir. Tiene prioridad
-    por sobre la redirección que podamos colocar en views.py -->
     <form action="" method="POST">
         {% csrf_token %}
         <table>
             {{ mi_formulario.as_table }}
         </table>
         <input type="submit" value="Enviar">
-
     </form>
 {% endblock main %}

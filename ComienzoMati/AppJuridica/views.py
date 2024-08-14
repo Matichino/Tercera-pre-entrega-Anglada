@@ -26,6 +26,7 @@ def form_con_api(request):
             informacion = mi_formulario.cleaned_data
             usuariocreado = Cliente(
                 usuario=informacion["usuario"],
+                contraseña=informacion["contraseña"],
                 numero_de_caso=informacion["numero_de_caso"]
             )
             usuariocreado.save()
