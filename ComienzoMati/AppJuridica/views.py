@@ -1,6 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from AppJuridica.models import Cliente
 from AppJuridica.forms import ClienteFormulario
+from .models import Yasoycliente
+from .forms import YasoyclienteForm
+from .forms import DatosdecontactoForm
 
 def inicio(request):
     return render (request, "AppJuridica/index.html")
@@ -35,3 +38,34 @@ def form_con_api(request):
         mi_formulario = ClienteFormulario()
 
     return render(request, "AppJuridica/form-con-api.html", {"mi_formulario": mi_formulario})
+
+
+def editar_cliente(request, pk):
+    cliente = get_object_or_404(Yasoycliente, pk=pk)
+    if request.method == 'POST':
+        form = YasoyclienteForm(request.POST, instance=cliente)
+        if form.is_valid():
+            form.save()
+            return redirect('cliente_listar')  # Redirige a una página después de guardar
+    else:
+        form = YasoyclienteForm(instance=cliente)
+    
+    return render(request, 'AppJuridica/editar_cliente.html', {'form': form})
+
+# Vista para listar todos los clientes
+def cliente_listar(request):
+    clientes = Yasoycliente.objects.all()
+    return render(request, 'AppJuridica/cliente_listar.html', {'clientes': clientes})
+
+def crear_datos_contacto(request):
+    if request.method == 'POST':
+        form = DatosdecontactoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('pagina_exito')  # Redirige a una página de éxito o a donde desees
+    else:
+        form = DatosdecontactoForm()
+    return render(request, 'AppJuridica/crear_datos_contacto.html', {'form': form})
+
+def pagina_exito(request):
+    return render(request, 'AppJuridica/pagina_exito.html')
